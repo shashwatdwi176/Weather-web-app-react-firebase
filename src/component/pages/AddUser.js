@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { unstable_HistoryRouter, useParam } from "react-router-dom";
-import firebase from "firebase/app";
-import "firebase/database";
-
-
+import  useFirebase from "../firebase";
+import { useNavigate, useParams } from "react-router-dom";
 import "./AddEdit.css";
-import fireDb from "../firebase"
+import 'firebase/database'
 import { toast } from "react-toastify";
+
 
 const initializeState = {
   username: "",
@@ -14,13 +12,42 @@ const initializeState = {
   email: "",
   contact: "",
 };
-const AddUser = () => {
-  const [state, setState] = useState(initializeState);
-  const [data, setData] = useState({});
 
+const AddUser = () => {
+  const firebase = useFirebase();
+  const [state, setState] = useState(initializeState);
+  const navigate = useNavigate();
+  const [data, setData] = useState({});
   const { username, name, email, contact } = state;
-  const handleInputChange = () => {};
-  const handleSubmit = () => {};
+  
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
+  };
+
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+  
+      if (!username || !name || !email || !contact) {
+        toast.error("All fields are required");
+      } else {
+        firebase.putData("users/", {
+          username: username,
+          name: name,
+          email: email,
+          contact: contact,
+        });
+  
+        toast.success("User added successfully");
+        setTimeout(() => navigate("/"), 500);
+      }
+    };
+  
+
+  
+  
   return (
     <div>
       <form
@@ -68,7 +95,7 @@ const AddUser = () => {
           value={contact}
           onChange={handleInputChange}
         />
-        <input type= "submit" value="Save"/>
+        <input type="submit" value="Save" />
       </form>
     </div>
   );

@@ -4,7 +4,25 @@ import './Header.css';
 
 const Header = () => {
   const [activeTab, setActiveTab] = useState('LoginPage');
+const location = useLocation();
 
+useEffect(()=>{
+  if(location.pathname === "/"){
+    setActiveTab('/')
+  }else if(location.pathname === "/home"){
+    setActiveTab('/home')
+  }
+  else if(location.pathname === "/update/:id"){
+    setActiveTab('/update/:id')
+  }
+  else if(location.pathname === "/view/:id"){
+    setActiveTab('/view/:id')
+  }
+  else if(location.pathname === "/adduser/:id"){
+    setActiveTab('/adduser/:id')
+  }
+  
+})
   return (
     <div className="header">
       <p className="logo">Weather App</p>
@@ -17,12 +35,21 @@ const Header = () => {
             Login Page
           </p>
         </Link>
+
         <Link to="/home">
           <p
             className={`${activeTab === '/home' ? 'active' : ''}`}
             onClick={() => setActiveTab('/home')}
           >
             Home
+          </p>
+        </Link>
+        <Link to="/adduser/:id">
+          <p
+            className={`${activeTab === '/adduser/:id' ? 'active' : ''}`}
+            onClick={() => setActiveTab('/adduser/:id')}
+          >
+            Add User
           </p>
         </Link>
         <Link to="/update/:id">
@@ -41,14 +68,7 @@ const Header = () => {
             View
           </p>
         </Link>
-        <Link to="/update/:id">
-          <p
-            className={`${activeTab === '/about/:id' ? 'active' : ''}`}
-            onClick={() => setActiveTab('/about/:id')}
-          >
-            About
-          </p>
-        </Link>
+     
       </div>
     </div>
   );

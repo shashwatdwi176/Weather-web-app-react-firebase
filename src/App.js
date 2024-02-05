@@ -6,9 +6,10 @@ import "./App.css";
 import Weathercard from "./component/weather/weathercard";
 import AddEdit from "./component/pages/AddEdit";
 import View from "./component/pages/View";
-import About from "./component/pages/About";
+
 import LoginPage from "./component/pages/LoginPage";
 import Header from "./component/Header";
+import AddUser from "./component/pages/AddUser";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/update/:id" element={<AddEdit />} />
           <Route path="/view/:id" element={<View />} />
-          <Route path="/about/:id" element={<About />} />
+          <Route path="/adduser/:id" element={<AddUser />}/>
         </Routes>
       </div>
     </BrowserRouter>

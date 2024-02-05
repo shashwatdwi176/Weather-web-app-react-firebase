@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-
+import "./temp.css"
 const Weathercard = ({
   temp,
   humidity,

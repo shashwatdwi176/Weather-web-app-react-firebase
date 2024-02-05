@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Weathercard from "./weathercard.js";
-import "./styles.css";
+import "./temp.css"; 
+
 
 
 const Temp = () => {
